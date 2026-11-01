@@ -1,0 +1,1233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Suhani aka Doraemon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --dora-blue: #0096E6;
+  --dora-blue-dark: #0077B6;
+  --dora-blue-light: #E1F4FF;
+  --dora-blue-surface: #F0F8FF;
+  --dora-red: #ED3833;
+  --dora-yellow: #FFD000;
+  --dora-door: #FF5A92;
+  --ink: #16243E;
+  --ink-muted: #536B88;
+  --surface: #FFFFFF;
+  --border-line: #16243E;
+  --font-bubble: "Fredoka", "Arial Rounded MT Bold", cursive, sans-serif;
+  --font-body: "Quicksand", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--dora-blue-surface);
+  background-image: 
+    radial-gradient(circle at 20px 20px, rgba(0, 150, 230, 0.08) 3px, transparent 0),
+    radial-gradient(circle at 60px 60px, rgba(237, 56, 51, 0.06) 4px, transparent 0);
+  background-size: 80px 80px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  padding-block: 28px 64px;
+  padding-inline: max(16px, env(safe-area-inset-left));
+}
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Floating Take-copter decoration */
+.floating-copter {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+}
+.floating-copter svg {
+  animation: floatBob 3s ease-in-out infinite alternate;
+}
+@keyframes floatBob {
+  0% { transform: translateY(0) rotate(-6deg); }
+  100% { transform: translateY(12px) rotate(8deg); }
+}
+
+/* Doraemon Collar Header */
+.dora-collar-stripe {
+  height: 14px;
+  background: var(--dora-red);
+  border: 3px solid var(--border-line);
+  border-radius: 999px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: -15px;
+  box-shadow: 0 4px 0 var(--border-line);
+}
+.dora-collar-bell {
+  width: 38px;
+  height: 38px;
+  background: var(--dora-yellow);
+  border: 3px solid var(--border-line);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 3px 0 var(--border-line);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dora-collar-bell:hover {
+  transform: scale(1.15) rotate(15deg);
+}
+.dora-collar-bell::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  width: 70%;
+  height: 3px;
+  background: var(--border-line);
+}
+.dora-collar-bell::after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border-line);
+}
+
+/* Hero Section */
+.hero-card {
+  background: var(--surface);
+  border: 3px solid var(--border-line);
+  border-radius: 28px;
+  padding: clamp(24px, 4vw, 36px);
+  box-shadow: 8px 8px 0 var(--border-line);
+  position: relative;
+  overflow: hidden;
+}
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  gap: 24px;
+  align-items: center;
+}
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+.date-chip {
+  font-family: var(--font-bubble);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--dora-yellow);
+  color: var(--ink);
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 2px solid var(--border-line);
+  box-shadow: 2px 2px 0 var(--border-line);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.hero .greet {
+  font-family: var(--font-bubble);
+  font-size: clamp(26px, 5vw, 36px);
+  color: var(--ink-muted);
+  line-height: 1.1;
+}
+.hero .name {
+  font-family: var(--font-bubble);
+  font-size: clamp(48px, 12vw, 84px);
+  color: var(--dora-blue);
+  line-height: 0.95;
+  text-shadow: 3px 3px 0 var(--border-line);
+  -webkit-text-stroke: 1.5px var(--border-line);
+  letter-spacing: -0.02em;
+}
+
+/* Manga Bubble */
+.bubble {
+  position: relative;
+  background: var(--dora-blue-surface);
+  border: 2.5px solid var(--border-line);
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 17px;
+  margin-top: 4px;
+  box-shadow: 3px 3px 0 var(--border-line);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.bubble::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: -11px;
+  width: 14px;
+  height: 14px;
+  background: var(--dora-blue-surface);
+  border-left: 2.5px solid var(--border-line);
+  border-top: 2.5px solid var(--border-line);
+  transform: rotate(45deg);
+}
+.bubble b {
+  color: var(--dora-red);
+  font-family: var(--font-bubble);
+  font-size: 20px;
+}
+.hero .sub {
+  color: var(--ink-muted);
+  font-size: 15px;
+  font-weight: 600;
+  max-width: 44ch;
+}
+
+/* Character Figure */
+.figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+.figure svg {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 0 rgba(22, 36, 62, 0.08));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.figure:hover svg {
+  transform: scale(1.03) rotate(-1deg);
+}
+.figure figcaption {
+  font-family: var(--font-bubble);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: #FFF;
+  border: 2px solid var(--border-line);
+  padding: 5px 16px;
+  border-radius: 999px;
+  color: var(--ink);
+  box-shadow: 2px 2px 0 var(--border-line);
+  text-align: center;
+}
+
+/* Realistic Take-Copter High-Speed Spin Animation */
+.takecopter-rotor {
+  transform-origin: 120px 14px;
+  animation: spinCopter 0.2s linear infinite;
+}
+@keyframes spinCopter {
+  0% { transform: scaleX(1); opacity: 0.95; }
+  25% { transform: scaleX(0.25) skewX(4deg); opacity: 0.7; }
+  50% { transform: scaleX(-1); opacity: 0.95; }
+  75% { transform: scaleX(-0.25) skewX(-4deg); opacity: 0.7; }
+  100% { transform: scaleX(1); opacity: 0.95; }
+}
+
+/* Section Headings */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+.tag-badge {
+  font-family: var(--font-bubble);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dora-blue-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.section-head h2 {
+  font-family: var(--font-bubble);
+  font-size: clamp(26px, 6vw, 36px);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Profile / Identity Card */
+.profile-card {
+  background: #FFFFFF;
+  border: 3px solid var(--border-line);
+  border-radius: 24px;
+  box-shadow: 7px 7px 0 var(--border-line);
+  overflow: hidden;
+  position: relative;
+}
+.profile-header-banner {
+  background: var(--dora-blue);
+  border-bottom: 3px solid var(--border-line);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #FFF;
+  font-family: var(--font-bubble);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+.profile-header-banner .passport-code {
+  background: rgba(255,255,255,0.25);
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  border: 1px dashed #FFF;
+}
+.profile-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+}
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.profile-row {
+  display: grid;
+  grid-template-columns: minmax(0, 11em) minmax(0, 1fr);
+  gap: 14px;
+  padding: 12px 6px;
+  border-bottom: 1.5px dashed #D0E3F5;
+  align-items: center;
+}
+.profile-row:last-child {
+  border-bottom: none;
+}
+.profile-row dt {
+  font-family: var(--font-bubble);
+  font-size: 14px;
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.profile-row dd {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ink);
+}
+.profile-row dd em {
+  font-style: normal;
+  color: var(--dora-red);
+  background: #FFF2F2;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid #FFCDCD;
+}
+.profile-stamp {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  border: 3px dashed var(--dora-red);
+  color: var(--dora-red);
+  font-family: var(--font-bubble);
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  transform: rotate(-8deg);
+  opacity: 0.9;
+  pointer-events: none;
+  background: rgba(255, 240, 240, 0.7);
+}
+.why-box {
+  margin-top: 16px;
+  background: var(--dora-blue-light);
+  border: 2.5px solid var(--dora-blue);
+  border-radius: 18px;
+  padding: 16px 20px;
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 15px;
+  box-shadow: 4px 4px 0 var(--border-line);
+}
+
+/* 4D Pocket & Cards */
+.pocket-container {
+  background: #FFFFFF;
+  border: 3px solid var(--border-line);
+  border-radius: 32px;
+  padding: clamp(20px, 4vw, 32px);
+  box-shadow: 8px 8px 0 var(--border-line);
+}
+.pocket-top-graphic {
+  display: flex;
+  justify-content: center;
+  margin-top: -10px;
+  margin-bottom: 24px;
+}
+.pocket-badge {
+  background: var(--surface);
+  border: 3px solid var(--border-line);
+  padding: 8px 24px;
+  border-radius: 0 0 28px 28px;
+  border-top: none;
+  font-family: var(--font-bubble);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--dora-blue);
+  box-shadow: 0 4px 0 var(--border-line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pocket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: 16px;
+}
+.gadget-card {
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  background: none;
+  perspective: 1000px;
+  min-height: 220px;
+  display: block;
+  width: 100%;
+}
+.gadget-card .card-inner {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  transition: transform 0.55s cubic-bezier(0.3, 0.7, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.gadget-card[aria-pressed="true"] .card-inner {
+  transform: rotateY(180deg);
+}
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 20px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2.5px solid var(--border-line);
+  box-shadow: 4px 4px 0 var(--border-line);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.gadget-card:hover .card-face {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0 var(--border-line);
+}
+.gadget-card:active .card-face {
+  transform: translateY(2px);
+  box-shadow: 2px 2px 0 var(--border-line);
+}
+.gadget-card:focus-visible {
+  outline: 3px solid var(--dora-red);
+  outline-offset: 4px;
+  border-radius: 22px;
+}
+.card-front {
+  background: #FFFFFF;
+  background-image: radial-gradient(circle at top right, var(--dora-blue-light) 0%, transparent 65%);
+}
+.card-gadget-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-item-tag {
+  font-family: var(--font-bubble);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--dora-yellow);
+  color: var(--ink);
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border-line);
+}
+.card-icon {
+  font-size: 26px;
+  line-height: 1;
+}
+.card-title-group {
+  margin-top: 10px;
+}
+.card-title {
+  font-family: var(--font-bubble);
+  font-size: 24px;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.card-hint {
+  font-family: var(--font-bubble);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dora-red);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.card-back {
+  background: var(--dora-blue);
+  color: #FFFFFF;
+  transform: rotateY(180deg);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 22px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.card-back-bell {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 10px;
+}
+
+/* Dokodemo Door Letter */
+.door-container {
+  background: #FFF;
+  border: 3px solid var(--border-line);
+  border-radius: 28px;
+  box-shadow: 8px 8px 0 var(--border-line);
+  overflow: hidden;
+}
+.door-top-arch {
+  background: var(--dora-door);
+  padding: 16px 24px;
+  border-bottom: 3px solid var(--border-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #FFF;
+  font-family: var(--font-bubble);
+}
+.door-top-arch .door-label {
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.door-knob-icon {
+  width: 20px;
+  height: 20px;
+  background: var(--dora-yellow);
+  border: 2px solid var(--border-line);
+  border-radius: 50%;
+  box-shadow: 1px 1px 0 var(--border-line);
+}
+.letter-content {
+  padding: clamp(22px, 5vw, 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-size: 17px;
+  line-height: 1.7;
+}
+.letter-content .to-suhani {
+  font-family: var(--font-bubble);
+  font-size: 32px;
+  color: var(--dora-blue);
+  line-height: 1;
+}
+.letter-content p {
+  color: var(--ink);
+}
+.letter-quote-box {
+  background: #FFF9E6;
+  border-left: 6px solid #E5AC00;
+  border-radius: 4px 14px 14px 4px;
+  padding: 14px 18px;
+  font-weight: 700;
+  font-size: 17px;
+  color: #5A4000;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.04);
+}
+.letter-content .signature-block {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.letter-content .signature {
+  font-family: var(--font-bubble);
+  font-size: 30px;
+  color: var(--dora-red);
+}
+
+/* Finale */
+.finale {
+  background: var(--surface);
+  border: 3px solid var(--border-line);
+  border-radius: 28px;
+  padding: clamp(26px, 5vw, 42px);
+  box-shadow: 8px 8px 0 var(--border-line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+.finale-party-strip {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+.finale-party-strip svg {
+  width: 48px;
+  height: 48px;
+  transition: transform 0.2s ease;
+}
+.finale-party-strip svg:hover {
+  transform: scale(1.2) rotate(8deg);
+}
+.finale h2 {
+  font-family: var(--font-bubble);
+  font-size: clamp(28px, 8vw, 44px);
+  color: var(--dora-blue);
+  line-height: 1.1;
+  text-shadow: 2px 2px 0 var(--border-line);
+}
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+.btn {
+  font-family: var(--font-bubble);
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  background: var(--dora-blue);
+  color: #FFFFFF;
+  border: 3px solid var(--border-line);
+  padding: 14px 32px;
+  border-radius: 999px;
+  box-shadow: 4px 4px 0 var(--border-line);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--border-line);
+}
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--border-line);
+}
+.btn-yellow {
+  background: var(--dora-yellow);
+  color: var(--ink);
+}
+
+/* Canvas Confetti */
+canvas#confetti {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-text {
+    align-items: center;
+  }
+  .bubble::before {
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .profile-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .figure svg {
+    max-width: 220px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gadget-card .card-inner { transition: none; }
+  .btn { transition: none; }
+  .takecopter-rotor { animation: none; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<!-- Top Corner Floating Take-copter -->
+<div class="floating-copter" title="Take-copter">
+  <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+    <ellipse cx="32" cy="14" rx="28" ry="5" fill="#FFD000" stroke="#16243E" stroke-width="3"/>
+    <rect x="30" y="14" width="4" height="26" fill="#FFD000" stroke="#16243E" stroke-width="2.5"/>
+    <ellipse cx="32" cy="40" rx="8" ry="4" fill="#ED3833" stroke="#16243E" stroke-width="2.5"/>
+  </svg>
+</div>
+
+<main class="wrap">
+
+  <!-- Doraemon Collar Stripe & Interactive Bell -->
+  <div class="dora-collar-stripe" title="Doraemon's Red Collar">
+    <button class="dora-collar-bell" id="bellTop" aria-label="Ring Doraemon's Bell" title="Click to ring bell!"></button>
+  </div>
+
+  <!-- Hero Section -->
+  <header class="hero-card">
+    <div class="hero">
+      <div class="hero-text">
+        <span class="date-chip">2 November</span>
+        <p class="greet">Happy Birthday,</p>
+        <h1 class="name">Suhani</h1>
+        <div class="bubble">Also known as <b>Doraemon</b></div>
+        <p class="sub">This page was made for one person only. Scroll down and find out who she is.</p>
+      </div>
+
+      <!-- Suhani Illustration with Take-Copter Centered on Head -->
+      <figure class="figure">
+        <svg viewBox="0 0 240 300" role="img" aria-label="A cartoon of Suhani with short hair, cute round glasses, take-copter on her head, holding a dorayaki">
+          <!-- Background Aura -->
+          <circle cx="120" cy="160" r="115" fill="#E1F4FF" stroke="#16243E" stroke-width="3" stroke-dasharray="6 4"/>
+          <!-- Shadow -->
+          <ellipse cx="120" cy="285" rx="54" ry="7" fill="#16243E" opacity="0.12"/>
+          
+          <!-- Legs & Shoes -->
+          <rect x="98" y="246" width="14" height="24" rx="6" fill="#FAD4C0" stroke="#16243E" stroke-width="2.5"/>
+          <rect x="128" y="246" width="14" height="24" rx="6" fill="#FAD4C0" stroke="#16243E" stroke-width="2.5"/>
+          <ellipse cx="103" cy="272" rx="14" ry="8" fill="#ED3833" stroke="#16243E" stroke-width="3"/>
+          <ellipse cx="137" cy="272" rx="14" ry="8" fill="#ED3833" stroke="#16243E" stroke-width="3"/>
+          <circle cx="103" cy="271" r="3" fill="#FFF"/>
+          <circle cx="137" cy="271" r="3" fill="#FFF"/>
+
+          <!-- Doraemon Blue Dress with 4D Pocket -->
+          <path d="M92 165 L148 165 L168 250 L72 250 Z" fill="#0096E6" stroke="#16243E" stroke-width="3" stroke-linejoin="round"/>
+          <ellipse cx="120" cy="214" rx="28" ry="24" fill="#FFFFFF" stroke="#16243E" stroke-width="2.5"/>
+          <path d="M102 214 Q120 236 138 214 Z" fill="#FFFFFF" stroke="#16243E" stroke-width="2.5"/>
+          <line x1="100" y1="214" x2="140" y2="214" stroke="#16243E" stroke-width="2.5"/>
+
+          <!-- Left Arm holding Dorayaki -->
+          <path d="M92 178 L64 165" stroke="#FAD4C0" stroke-width="12" stroke-linecap="round"/>
+          <circle cx="60" cy="163" r="10" fill="#FAD4C0" stroke="#16243E" stroke-width="2.5"/>
+          <g transform="translate(42, 145)">
+            <ellipse cx="16" cy="16" rx="16" ry="11" fill="#C67D34" stroke="#16243E" stroke-width="2.5"/>
+            <ellipse cx="16" cy="16" rx="16" ry="4" fill="#691F18"/>
+            <ellipse cx="16" cy="14" rx="16" ry="9" fill="#E89F53" stroke="#16243E" stroke-width="2.5"/>
+          </g>
+
+          <!-- Right Arm waving -->
+          <path d="M148 178 L176 155" stroke="#FAD4C0" stroke-width="12" stroke-linecap="round"/>
+          <circle cx="178" cy="153" r="10" fill="#FAD4C0" stroke="#16243E" stroke-width="2.5"/>
+
+          <!-- Neck Red Collar & Yellow Bell -->
+          <rect x="100" y="156" width="40" height="9" rx="4" fill="#ED3833" stroke="#16243E" stroke-width="2.5"/>
+          <circle cx="120" cy="166" r="6" fill="#FFD000" stroke="#16243E" stroke-width="2"/>
+          <circle cx="120" cy="167" r="1.5" fill="#16243E"/>
+
+          <!-- Hair Back (Cute Short Bob) -->
+          <path d="M56 120 C50 56 90 42 120 42 C150 42 190 56 184 120 L184 150 Q184 160 172 158 L68 158 Q56 160 56 150 Z" fill="#201512" stroke="#16243E" stroke-width="3"/>
+
+          <!-- Face -->
+          <circle cx="120" cy="112" r="46" fill="#FAD4C0" stroke="#16243E" stroke-width="3"/>
+
+          <!-- Doraemon Whisker Accents -->
+          <line x1="72" y1="116" x2="56" y2="114" stroke="#16243E" stroke-width="2" stroke-linecap="round"/>
+          <line x1="72" y1="124" x2="54" y2="127" stroke="#16243E" stroke-width="2" stroke-linecap="round"/>
+          <line x1="168" y1="116" x2="184" y2="114" stroke="#16243E" stroke-width="2" stroke-linecap="round"/>
+          <line x1="168" y1="124" x2="186" y2="127" stroke="#16243E" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Hair Bangs -->
+          <path d="M72 102 C80 60 160 60 168 102 C152 84 136 82 120 86 C104 82 88 84 72 102 Z" fill="#201512"/>
+
+          <!-- Glasses & Happy Eyes -->
+          <circle cx="98" cy="114" r="14" fill="#FFFFFF" fill-opacity="0.3" stroke="#16243E" stroke-width="3"/>
+          <circle cx="142" cy="114" r="14" fill="#FFFFFF" fill-opacity="0.3" stroke="#16243E" stroke-width="3"/>
+          <path d="M112 113 Q120 108 128 113" stroke="#16243E" stroke-width="3" fill="none"/>
+          
+          <path d="M91 113 Q98 106 105 113" stroke="#16243E" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M135 113 Q142 106 149 113" stroke="#16243E" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Blushing Cheeks -->
+          <ellipse cx="84" cy="126" rx="9" ry="5" fill="#FF8C94" opacity="0.8"/>
+          <ellipse cx="156" cy="126" rx="9" ry="5" fill="#FF8C94" opacity="0.8"/>
+
+          <!-- Big Laughing Smile -->
+          <path d="M104 126 Q120 152 136 126 Z" fill="#D32F2F" stroke="#16243E" stroke-width="2.5"/>
+          <path d="M111 138 Q120 133 129 138 Q120 148 111 138 Z" fill="#FF8A80"/>
+
+          <!-- PROPER TAKE-COPTER MOUNTED SECURELY ON HER HEAD -->
+          <!-- Suction Base mounted to the hair crown -->
+          <ellipse cx="120" cy="42" rx="11" ry="5" fill="#ED3833" stroke="#16243E" stroke-width="2.5"/>
+          <!-- Vertical Yellow Shaft -->
+          <rect x="117.5" y="14" width="5" height="28" rx="2" fill="#FFD000" stroke="#16243E" stroke-width="2.5"/>
+          <!-- Center Top Rotor Hub -->
+          <circle cx="120" cy="14" r="4.5" fill="#ED3833" stroke="#16243E" stroke-width="2"/>
+
+          <!-- Spinning Propeller Rotor Blades -->
+          <g class="takecopter-rotor">
+            <!-- Dual Horizontal Blades -->
+            <ellipse cx="120" cy="14" rx="38" ry="5" fill="#FFD000" stroke="#16243E" stroke-width="2.5"/>
+            <circle cx="120" cy="14" r="3.5" fill="#ED3833"/>
+          </g>
+        </svg>
+        <figcaption>Small height. Short hair. Big laugh.</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <!-- Official Record Section -->
+  <section aria-labelledby="profile-h">
+    <div class="section-head">
+      <span class="tag-badge">Official record</span>
+      <h2 id="profile-h">Who is Doraemon?</h2>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-header-banner">
+        <span>BEST FRIEND IDENTITY CARD</span>
+        <span class="passport-code">ID: SUHANI-02NOV</span>
+      </div>
+      <div class="profile-body">
+        <dl class="profile-grid">
+          <div class="profile-row"><dt>Real name</dt><dd>Suhani</dd></div>
+          <div class="profile-row"><dt>Known as</dt><dd><em>Doraemon</em>, a name only I use</dd></div>
+          <div class="profile-row"><dt>Occupation</dt><dd>Best friend, full time, no leave</dd></div>
+          <div class="profile-row"><dt>Height</dt><dd>Small. Mighty.</dd></div>
+          <div class="profile-row"><dt>Hair</dt><dd>Short, and it suits her</dd></div>
+          <div class="profile-row"><dt>Signature sound</dt><dd>That laugh</dd></div>
+          <div class="profile-row"><dt>Special ability</dt><dd>Makes a bad day smaller</dd></div>
+          <div class="profile-row"><dt>Registered by</dt><dd>Mohit</dd></div>
+        </dl>
+
+        <div class="profile-stamp">100% CERTIFIED DORAEMON</div>
+      </div>
+    </div>
+
+    <p class="why-box">The name stuck because of her small, round, cute face and her little frame. Add a laugh that fills the room, and the name was never going to change.</p>
+  </section>
+
+  <!-- What's in Her Pocket: 6 Flip Cards -->
+  <section aria-labelledby="pocket-h">
+    <div class="section-head">
+      <span class="tag-badge">Tap a card to open it</span>
+      <h2 id="pocket-h">What is in her pocket</h2>
+    </div>
+
+    <div class="pocket-container">
+      <div class="pocket-top-graphic">
+        <div class="pocket-badge"><span>🌟</span> TAP TO FLIP & REVEAL <span>🌟</span></div>
+      </div>
+
+      <div class="pocket-grid">
+        <!-- Item 1 -->
+        <button class="gadget-card" type="button" aria-pressed="false" id="card1">
+          <span class="card-inner">
+            <span class="card-face card-front">
+              <span class="card-gadget-head">
+                <span class="card-item-tag">Item 1</span>
+                <span class="card-icon">🍞</span>
+              </span>
+              <span class="card-title-group">
+                <div class="card-title">The listener</div>
+              </span>
+              <span class="card-hint">Tap to open ➔</span>
+            </span>
+            <span class="card-face card-back">
+              <svg class="card-back-bell" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD000" stroke="#FFF" stroke-width="2"/><line x1="6" y1="12" x2="18" y2="12" stroke="#FFF" stroke-width="2"/></svg>
+              Tell her anything. It stays with her, and she never makes you feel silly for saying it.
+            </span>
+          </span>
+        </button>
+
+        <!-- Item 2 -->
+        <button class="gadget-card" type="button" aria-pressed="false" id="card2">
+          <span class="card-inner">
+            <span class="card-face card-front">
+              <span class="card-gadget-head">
+                <span class="card-item-tag">Item 2</span>
+                <span class="card-icon">☀️</span>
+              </span>
+              <span class="card-title-group">
+                <div class="card-title">The mood fixer</div>
+              </span>
+              <span class="card-hint">Tap to open ➔</span>
+            </span>
+            <span class="card-face card-back">
+              <svg class="card-back-bell" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD000" stroke="#FFF" stroke-width="2"/><line x1="6" y1="12" x2="18" y2="12" stroke="#FFF" stroke-width="2"/></svg>
+              One message from her and the whole day gets lighter. She does not even need to try.
+            </span>
+          </span>
+        </button>
+
+        <!-- Item 3 -->
+        <button class="gadget-card" type="button" aria-pressed="false" id="card3">
+          <span class="card-inner">
+            <span class="card-face card-front">
+              <span class="card-gadget-head">
+                <span class="card-item-tag">Item 3</span>
+                <span class="card-icon">🚁</span>
+              </span>
+              <span class="card-title-group">
+                <div class="card-title">The hype machine</div>
+              </span>
+              <span class="card-hint">Tap to open ➔</span>
+            </span>
+            <span class="card-face card-back">
+              <svg class="card-back-bell" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD000" stroke="#FFF" stroke-width="2"/><line x1="6" y1="12" x2="18" y2="12" stroke="#FFF" stroke-width="2"/></svg>
+              She believes in your plans before you do, and says so loudly until you believe them too.
+            </span>
+          </span>
+        </button>
+
+        <!-- Item 4 -->
+        <button class="gadget-card" type="button" aria-pressed="false" id="card4">
+          <span class="card-inner">
+            <span class="card-face card-front">
+              <span class="card-gadget-head">
+                <span class="card-item-tag">Item 4</span>
+                <span class="card-icon">🌸</span>
+              </span>
+              <span class="card-title-group">
+                <div class="card-title">The big laugh</div>
+              </span>
+              <span class="card-hint">Tap to open ➔</span>
+            </span>
+            <span class="card-face card-back">
+              <svg class="card-back-bell" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD000" stroke="#FFF" stroke-width="2"/><line x1="6" y1="12" x2="18" y2="12" stroke="#FFF" stroke-width="2"/></svg>
+              Her laugh is the best sound in any room. It spreads until everyone is laughing with her.
+            </span>
+          </span>
+        </button>
+
+        <!-- Item 5 -->
+        <button class="gadget-card" type="button" aria-pressed="false" id="card5">
+          <span class="card-inner">
+            <span class="card-face card-front">
+              <span class="card-gadget-head">
+                <span class="card-item-tag">Item 5</span>
+                <span class="card-icon">🚪</span>
+              </span>
+              <span class="card-title-group">
+                <div class="card-title">The always there</div>
+              </span>
+              <span class="card-hint">Tap to open ➔</span>
+            </span>
+            <span class="card-face card-back">
+              <svg class="card-back-bell" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD000" stroke="#FFF" stroke-width="2"/><line x1="6" y1="12" x2="18" y2="12" stroke="#FFF" stroke-width="2"/></svg>
+              Noon or midnight, busy or not, she shows up. That is the rarest thing in the pocket.
+            </span>
+          </span>
+        </button>
+
+        <!-- Item 6 -->
+        <button class="gadget-card" type="button" aria-pressed="false" id="card6">
+          <span class="card-inner">
+            <span class="card-face card-front">
+              <span class="card-gadget-head">
+                <span class="card-item-tag">Item 6</span>
+                <span class="card-icon">🎂</span>
+              </span>
+              <span class="card-title-group">
+                <div class="card-title">The birthday wish</div>
+              </span>
+              <span class="card-hint">Tap to open ➔</span>
+            </span>
+            <span class="card-face card-back">
+              <svg class="card-back-bell" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD000" stroke="#FFF" stroke-width="2"/><line x1="6" y1="12" x2="18" y2="12" stroke="#FFF" stroke-width="2"/></svg>
+              May this year give her everything she has given everyone else, and then some.
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Letter Section -->
+  <section aria-labelledby="letter-h">
+    <div class="section-head">
+      <span class="tag-badge">A short letter</span>
+      <h2 id="letter-h">From me to you</h2>
+    </div>
+
+    <article class="door-container">
+      <div class="door-top-arch">
+        <span class="door-label"><span>🚪</span> ANYWHERE DOOR • EXPRESS DELIVERY</span>
+        <div class="door-knob-icon" title="Golden Door Knob"></div>
+      </div>
+      <div class="letter-content">
+        <p class="to-suhani">Suhani,</p>
+        <p>Happy birthday. I call you Doraemon because of that small, round, cute face, and because whenever I am stuck you somehow have something that fixes it. And that laugh of yours. Please never lose it.</p>
+        <p>Thank you for the calls, the patience, and for being there on days I never asked you to be. I hope this year gives all of it back to you, double.</p>
+        
+        <p> One more thing, and I would rather say it the way I actually talk to you.</p>
+
+        <p>Doosron ki wajah se khud pe shak karna band kar do, Suhani. Tum jitna sochti ho, usse kahin zyada ho. Apni life mein jo bhi karna hai, poore dil se karo, aur best karo.</p>
+
+        <p>Eat the cake. Take the whole day. You have earned it.</p>
+
+        <div class="signature-block">
+          <div>
+            <div class="signature">Mohit</div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- Finale Section -->
+  <section class="finale" aria-labelledby="end-h">
+    <div class="finale-party-strip" aria-hidden="true">
+      <svg viewBox="0 0 64 64">
+        <rect x="10" y="34" width="44" height="20" rx="6" fill="#FFFFFF" stroke="#16243E" stroke-width="3"/>
+        <path d="M10 40 Q18 48 26 40 Q34 48 42 40 Q50 48 54 40 L54 35 L10 35 Z" fill="#ED3833"/>
+        <rect x="30" y="18" width="4" height="16" fill="#FFD000" stroke="#16243E" stroke-width="2"/>
+        <circle cx="32" cy="13" r="4" fill="#ED3833"/>
+      </svg>
+      <svg viewBox="0 0 64 64">
+        <rect x="12" y="26" width="40" height="28" rx="4" fill="#0096E6" stroke="#16243E" stroke-width="3"/>
+        <rect x="8" y="18" width="48" height="10" rx="3" fill="#0077B6" stroke="#16243E" stroke-width="3"/>
+        <rect x="29" y="18" width="6" height="36" fill="#FFD000"/>
+        <ellipse cx="24" cy="13" rx="7" ry="5" fill="#ED3833" stroke="#16243E" stroke-width="2.5"/>
+        <ellipse cx="40" cy="13" rx="7" ry="5" fill="#ED3833" stroke="#16243E" stroke-width="2.5"/>
+      </svg>
+      <svg viewBox="0 0 64 64">
+        <path d="M22 40 Q26 54 32 62 M42 38 Q38 52 32 62" stroke="#16243E" stroke-width="2" fill="none"/>
+        <ellipse cx="22" cy="24" rx="12" ry="15" fill="#ED3833" stroke="#16243E" stroke-width="2.5"/>
+        <ellipse cx="42" cy="22" rx="12" ry="15" fill="#0096E6" stroke="#16243E" stroke-width="2.5"/>
+        <ellipse cx="19" cy="18" rx="3" ry="5" fill="#FFF" opacity="0.6"/>
+      </svg>
+      <svg viewBox="0 0 64 64">
+        <polygon points="32,6 39,24 58,25 43,37 48,56 32,45 16,56 21,37 6,25 25,24" fill="#FFD000" stroke="#16243E" stroke-width="3" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h2 id="end-h">Happy Birthday, Doraemon!</h2>
+
+    <div class="button-row">
+      <button class="btn" type="button" id="rain">Make it rain</button>
+      <button class="btn btn-yellow" type="button" id="chimeBtn">Ring the bell 🔔</button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  // Synthesized Doraemon Bell Sound
+  var audioCtx = null;
+  function playBellChime() {
+    try {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      var now = audioCtx.currentTime;
+      var freqs = [1046.5, 1318.5]; // C6 and E6
+      freqs.forEach(function (f, i) {
+        var osc = audioCtx.createOscillator();
+        var gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(f, now + i * 0.12);
+        
+        gain.gain.setValueAtTime(0.25, now + i * 0.12);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.12 + 0.8);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(now + i * 0.12);
+        osc.stop(now + i * 0.12 + 0.85);
+      });
+    } catch (e) {}
+  }
+
+  var bellBtn = document.getElementById('chimeBtn');
+  var topBell = document.getElementById('bellTop');
+  if (bellBtn) bellBtn.addEventListener('click', function () {
+    playBellChime();
+    burst(50);
+  });
+  if (topBell) topBell.addEventListener('click', function () {
+    playBellChime();
+    burst(40);
+  });
+
+  // Flip cards with chime & ARIA state
+  var cards = document.querySelectorAll('.gadget-card');
+  cards.forEach(function (c) {
+    c.addEventListener('click', function () {
+      var on = c.getAttribute('aria-pressed') === 'true';
+      c.setAttribute('aria-pressed', on ? 'false' : 'true');
+      playBellChime();
+    });
+  });
+
+  // Confetti system
+  var canvas = document.getElementById('confetti');
+  var ctx = canvas.getContext('2d');
+  var parts = [];
+  var running = false;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function size() {
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.floor(window.innerWidth * dpr);
+    canvas.height = Math.floor(window.innerHeight * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  size();
+  window.addEventListener('resize', size);
+
+  var themeColors = ['#0096E6', '#ED3833', '#FFD000', '#FF5A92', '#FFFFFF', '#0077B6'];
+
+  function burst(count) {
+    var w = window.innerWidth;
+    for (var i = 0; i < count; i++) {
+      var shapeType = 'rect';
+      var rand = Math.random();
+      if (rand < 0.25) shapeType = 'dorayaki';
+      else if (rand < 0.45) shapeType = 'bell';
+      else if (rand < 0.70) shapeType = 'circle';
+
+      parts.push({
+        x: Math.random() * w,
+        y: -30 - Math.random() * (window.innerHeight * 0.4),
+        vx: (Math.random() - 0.5) * 3,
+        vy: 2.5 + Math.random() * 4,
+        s: 8 + Math.random() * 12,
+        r: Math.random() * Math.PI * 2,
+        vr: (Math.random() - 0.5) * 0.2,
+        c: themeColors[Math.floor(Math.random() * themeColors.length)],
+        type: shapeType
+      });
+    }
+    if (!running) {
+      running = true;
+      requestAnimationFrame(tick);
+    }
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    var h = window.innerHeight;
+    parts = parts.filter(function (p) { return p.y < h + 40; });
+
+    parts.forEach(function (p) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.r += p.vr;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.r);
+
+      if (p.type === 'dorayaki') {
+        ctx.fillStyle = '#C67D34';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.s, p.s * 0.65, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#691F18';
+        ctx.fillRect(-p.s * 0.9, -1, p.s * 1.8, 2);
+      } else if (p.type === 'bell') {
+        ctx.fillStyle = '#FFD000';
+        ctx.beginPath();
+        ctx.arc(0, 0, p.s * 0.6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#16243E';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      } else if (p.type === 'circle') {
+        ctx.fillStyle = p.c;
+        ctx.beginPath();
+        ctx.arc(0, 0, p.s * 0.5, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.fillStyle = p.c;
+        ctx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2);
+      }
+
+      ctx.restore();
+    });
+
+    if (parts.length > 0) {
+      requestAnimationFrame(tick);
+    } else {
+      running = false;
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    }
+  }
+
+  var rainBtn = document.getElementById('rain');
+  if (rainBtn) {
+    rainBtn.addEventListener('click', function () {
+      if (reduce) return;
+      playBellChime();
+      burst(160);
+    });
+  }
+
+  if (!reduce) {
+    setTimeout(function () { burst(90); }, 400);
+  }
+})();
+</script>
+
+</body>
+</html>
